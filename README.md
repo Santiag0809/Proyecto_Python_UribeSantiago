@@ -54,5 +54,5 @@ Proyecto_Python_UribeSantiago/
 - Guarda automáticamente los nuevos registros al cerrar o modificar la información.
 
 ### 🦾 / 🗑 Actualizar y o borrar datos 
-- El usuario podra acceder a sus gastos ya guardados ademas de poder actualizarlos y o borrar 
-- Dichos cambios quedaran guardados dentro de un archivo JSON
+- El usuario podra acceder a sus gastos ya guardados ademas de poder actualizarlos y o borrar .
+- Dichos cambios quedaran guardados dentro de un archivo JSON.
