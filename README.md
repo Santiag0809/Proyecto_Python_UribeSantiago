@@ -22,14 +22,16 @@ Con el Simulador de Gasto Diario, los usuarios pueden organizar sus gastos de fo
 ---
 
 ## 📂 Estructura del Proyecto
+```
 Proyecto_Python_UribeSantiago/
 ├── Main/
-│ └── main.py
+│   └── main.py
 ├── register/
-│ └── register.py
+│   └── register.py
 ├── data/
-│ └── content.json
+│   └── content.json
 ├── README.md
+```
 
 ## Funciones principales del programa
 
