@@ -5,7 +5,13 @@
             "apellido": "Uribe",
             "email": "santiago@gmail.com",
             "password": "123hola789",
-            "gastos": []
+            "gastos": [
+                {
+                    "monto": 5000.0,
+                    "categoria": "Comida",
+                    "descripcion": ""
+                }
+            ]
         },
         {
             "nombre": "juanpepe",

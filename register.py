@@ -1,4 +1,5 @@
 import json
+import datetime
 file_path="Data/content.json"
 
 def leer_data():
@@ -68,24 +69,61 @@ def usuario_existente(email):
     return False
 
 def registrar_gasto(usuario):
-        print("=============================================")
-        print("         Registrar Nuevo Gasto               ")
-        print("=============================================")
-        print("     Ingrese la información del gasto:       ")
-        print(" - Monto del gasto:")
-        print(" - Categoría (ej. comida, transporte, entretenimiento, otros):")
-        print(" - Descripción (opcional): ")
-        print("Ingrese 'S' para guardar o 'C' para cancelar.")
-        print("=============================================")
-        print("")
-        monto=float(input("Ingrese el monto del gasto"))
-        categoia=input("En que categoria entra el gasto (Ej.)")
-        descripcion=input("¿Desea agregar una descripcion? S/N").lower
-        if descripcion =="S":
-            descripcion=input("Agregue una descripcion corta del gasto")
-        elif descripcion =="N":
-            descripcion=("")
-        else:
-            print("Opcion no valida")
-            descripcion=("")
+    datos = leer_data()  
+    email = usuario["email"]  
+    print("=============================================")
+    print("         Registrar Nuevo Gasto               ")
+    print("=============================================")
+    monto = float(input("Ingrese el monto del gasto: "))
+    categoria = input("En qué categoría entra el gasto (ej. comida, transporte, etc.): ")
+    desea = input("¿Desea agregar una descripción? (S/N): ").strip().lower()
+    if desea == "s":
+        descripcion = input("Agregue una descripción corta del gasto: ")
+    else:
+        descripcion = ""
 
+
+    nuevo_gasto = {
+        "monto": monto,
+        "categoria": categoria,
+        "descripcion": descripcion
+    }
+
+    
+    for user in datos["usuarios"]:
+        if user["email"] == email:
+            user["gastos"].append(nuevo_gasto)
+            break
+    
+    guardar_data(datos)
+    print("Gasto registrado cajasanmente.")
+
+def listar_gastos(usuario):
+    if "gastos" not in usuario:
+        print("No hay gastos registrados.")
+        return
+    print("=============================================")
+    print("               Listar Gastos                 ")
+    print("=============================================")
+    print("Seleccione una opción para filtrar los gastos:")
+    print("1. Ver todos los gastos")
+    print("2. Filtrar por categoría")
+    print("3. Filtrar por rango de fechas")
+    print("4. Regresar al menú principal")
+    print("=============================================")
+    option = input("Ingrese una opción numerica: ")
+    if option == "1":
+        print("Gastos registrados hasta la fecha:")
+        for gasto in usuario["gastos"]:
+            print(f"- Monto:{gasto['monto']}, Categoría: {gasto['categoria']}, Descripción: {gasto['descripcion']}")
+    elif option == "2":
+        categoria = input("Ingrese la categoría por la que desea filtrar: ")
+        if categoria not in usuario["gastos"]:
+            print("No hay gastos registrados en esta categoría.")
+            return
+        print(f"Gastos en la categoría '{categoria}':")
+        for gasto in usuario["gastos"]:
+            if gasto['categoria'] == categoria:
+                print(f"- Monto:{gasto['monto']}, Descripción: {gasto['descripcion']}")
+    
+    

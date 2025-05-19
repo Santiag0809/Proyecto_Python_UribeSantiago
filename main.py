@@ -1,4 +1,4 @@
-from register import registrar_usuario, usuario_existente, iniciar_sesion
+from register import registrar_usuario, usuario_existente, iniciar_sesion, registrar_gasto
 
 print("Bienvenido al sistema de registro de usuarios")
 print("1. Registrar usuario")
@@ -33,10 +33,9 @@ while usuario:
     print("=============================================")
 
     opcion = input("Ingrese una opción: ")
-    if opcion==1:
-        
+    if opcion == "1":
+        registrar_gasto(usuario)
 
-            
 
 
 
