@@ -1,3 +1,25 @@
 {
-
+    "usuarios": [
+        {
+            "nombre": "Santiago",
+            "apellido": "Uribe",
+            "email": "santiago@gmail.com",
+            "password": "123hola789",
+            "gastos": []
+        },
+        {
+            "nombre": "juanpepe",
+            "apellido": "duarte",
+            "email": "juancho@gmail.com",
+            "password": "confidencial",
+            "gastos": []
+        },
+        {
+            "nombre": "Daniel",
+            "apellido": "ito",
+            "email": "danielito@gmail.com",
+            "password": "daniel_ito",
+            "gastos": []
+        }
+    ]
 }

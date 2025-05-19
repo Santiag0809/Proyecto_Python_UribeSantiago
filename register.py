@@ -1,5 +1,5 @@
 import json
-file_path="data/content.json"
+file_path="Data/content.json"
 
 def leer_data():
     with open (file_path,"r") as file:
@@ -35,7 +35,8 @@ def registrar_usuario():
     datos["usuarios"].append(nuevo_usuario)
     guardar_data(datos)  
     print("Usuario registrado exitosamente.")
-    return nuevo_usuario
+    usuario_actual = nuevo_usuario
+    return usuario_actual
 
 
 def iniciar_sesion():
@@ -50,7 +51,8 @@ def iniciar_sesion():
 
     for usuario in datos["usuarios"]:
         if usuario["email"] == email and usuario["password"] == password:
-            return usuario
+            usuario_actual=usuario
+            return usuario_actual
 
     print("Usuario o contraseña incorrectos.")
     return None

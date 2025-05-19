@@ -33,3 +33,44 @@ while usuario:
     print("=============================================")
 
     opcion = input("Ingrese una opción: ")
+    if opcion==1:
+        print("=============================================")
+        print("         Registrar Nuevo Gasto               ")
+        print("=============================================")
+        print("     Ingrese la información del gasto:       ")
+        print(" - Monto del gasto:")
+        print(" - Categoría (ej. comida, transporte, entretenimiento, otros):")
+        print(" - Descripción (opcional): ")
+        print("Ingrese 'S' para guardar o 'C' para cancelar.")
+        print("=============================================")
+        print("")
+        monto=float(input("Ingrese el monto del gasto"))
+        categoia=input("En que categoria entra el gasto (Ej.)")
+        print("¿Desea añadir una descripcion? S/N ") 
+
+
+
+
+
+
+
+
+
+
+    
+   
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
