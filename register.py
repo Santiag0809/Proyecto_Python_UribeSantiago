@@ -66,3 +66,26 @@ def usuario_existente(email):
             if usuario["email"] == email:
                 return True
     return False
+
+def registrar_gasto(usuario):
+        print("=============================================")
+        print("         Registrar Nuevo Gasto               ")
+        print("=============================================")
+        print("     Ingrese la información del gasto:       ")
+        print(" - Monto del gasto:")
+        print(" - Categoría (ej. comida, transporte, entretenimiento, otros):")
+        print(" - Descripción (opcional): ")
+        print("Ingrese 'S' para guardar o 'C' para cancelar.")
+        print("=============================================")
+        print("")
+        monto=float(input("Ingrese el monto del gasto"))
+        categoia=input("En que categoria entra el gasto (Ej.)")
+        descripcion=input("¿Desea agregar una descripcion? S/N").lower
+        if descripcion =="S":
+            descripcion=input("Agregue una descripcion corta del gasto")
+        elif descripcion =="N":
+            descripcion=("")
+        else:
+            print("Opcion no valida")
+            descripcion=("")
+

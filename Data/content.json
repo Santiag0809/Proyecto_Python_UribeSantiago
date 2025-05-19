@@ -20,6 +20,13 @@
             "email": "danielito@gmail.com",
             "password": "daniel_ito",
             "gastos": []
+        },
+        {
+            "nombre": "sdads",
+            "apellido": "1oasl",
+            "email": "jsadasdua@gmail.com",
+            "password": "123Hola",
+            "gastos": []
         }
     ]
 }
