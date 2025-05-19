@@ -30,7 +30,7 @@ while usuario:
     print("2. Listar gastos")
     print("3. Calcular total de gastos")
     print("4. Generar reporte de gastos")
-    print("5. Actualar o borrar gastos de usuario")
+    print("5. Actualizar o borrar gastos de usuario")
     print("6. Salir")
     print("=============================================")
 
