@@ -46,7 +46,7 @@ while usuario:
         print("Estas seguro que desea salir? (S/N): ")
         salir = input().strip().lower()
         if salir == "s":
-            print("Saliendo del sistema...")
+            print("Saliendo del simulador...")
             break
         else:
             print("Regresando al menú principal...")

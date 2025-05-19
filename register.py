@@ -1,6 +1,8 @@
 import json
 import datetime
 from tabulate import tabulate
+
+
 file_path="Data/content.json"
 
 def leer_data():
@@ -102,9 +104,10 @@ def registrar_gasto(usuario):
     print("Gasto registrado cajasanmente.")
 
 def listar_gastos(usuario):
-    if "gastos" not in usuario:
+    if "gastos" not in usuario or not usuario["gastos"]:
         print("No hay gastos registrados.")
         return
+
     print("=============================================")
     print("               Listar Gastos                 ")
     print("=============================================")
@@ -114,45 +117,47 @@ def listar_gastos(usuario):
     print("3. Filtrar por rango de fechas")
     print("4. Regresar al menú principal")
     print("=============================================")
-    option = input("Ingrese una opción numerica: ")
+    option = input("Ingrese una opción numérica: ")
+
     if option == "1":
         print("Gastos registrados hasta la fecha:")
-        for gasto in usuario["gastos"]:
-            print(f"- Monto:{gasto['monto']}, Categoría: {gasto['categoria']}, Descripción: {gasto['descripcion']}")
+        print(tabulate(usuario["gastos"], headers="keys", tablefmt="grid"))
+
     elif option == "2":
         categoria = input("Ingrese la categoría por la que desea filtrar: ")
-        if categoria not in usuario["gastos"]:
+        filtrados = [g for g in usuario["gastos"] if g["categoria"].lower() == categoria.lower()]
+        if filtrados:
+            print(f"Gastos en la categoría '{categoria}':")
+            print(tabulate(filtrados, headers="keys", tablefmt="grid"))
+        else:
             print("No hay gastos registrados en esta categoría.")
-            return
-        print(f"Gastos en la categoría '{categoria}':")
-        for gasto in usuario["gastos"]:
-            if gasto['categoria'] == categoria:
-                print(f"- Monto:{gasto['monto']}, Descripción: {gasto['descripcion']}")
+
     elif option == "3":
-        fecha_inicial = input("Ingrese la fecha inicial para hacer la busqueda (YYYY-MM-DD): ")
-        fecha_final = input("Ingrese la fecha final para hacer la busqueda (YYYY-MM-DD): ")
+        fecha_inicial = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
+        fecha_final = input("Ingrese la fecha final (YYYY-MM-DD): ")
         try:
-            fecha_inicio = datetime.strptime(fecha_inicial, "%Y-%m-%d").date()
-            fecha_fin = datetime.strptime(fecha_final, "%Y-%m-%d").date()
+            fecha_inicio = datetime.datetime.strptime(fecha_inicial, "%Y-%m-%d").date()
+            fecha_fin = datetime.datetime.strptime(fecha_final, "%Y-%m-%d").date()
         except ValueError:
             print("Formato de fecha inválido. Usa el formato YYYY-MM-DD.")
             return
-        gastos_listados = []
+
+        filtrados = []
         for gasto in usuario["gastos"]:
-            fecha_gasto = datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
-            if fecha_inicio <= fecha_gasto <= fecha_fin:
-                gastos_listados.append(gasto)
-            if gastos_listados:
-                print("Gastos en el rango de fechas:")
-                for gasto in gastos_listados:
-                    print(f"- Monto:{gasto['monto']}, Categoría: {gasto['categoria']}, Descripción: {gasto['descripcion']}")
-            else:
-                print("No hay gastos registrados en este rango de fechas.")       
+            gasto_fecha = datetime.datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
+            if fecha_inicio <= gasto_fecha <= fecha_fin:
+                filtrados.append(gasto)
+
+        if filtrados:
+            print(f"Gastos entre {fecha_inicial} y {fecha_final}:")
+            print(tabulate(filtrados, headers="keys", tablefmt="grid"))
+        else:
+            print("No hay gastos en ese rango de fechas.")
+
     elif option == "4":
         print("Regresando al menú principal...")
     else:
         print("Opción inválida. Por favor, seleccione una opción válida.")
-        print("=============================================")
 
        
         
