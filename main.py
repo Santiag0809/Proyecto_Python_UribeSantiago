@@ -1,4 +1,4 @@
-from register import registrar_usuario, usuario_existente, iniciar_sesion, registrar_gasto
+from register import registrar_usuario, usuario_existente, iniciar_sesion, registrar_gasto, listar_gastos
 
 print("Bienvenido al sistema de registro de usuarios")
 print("1. Registrar usuario")
@@ -20,6 +20,7 @@ else:
     print(" No se pudo iniciar sesión o registrarse.")
 
 print("")
+
 while usuario:
     print("=============================================")
     print("         Simulador de Gasto Diario")
@@ -35,7 +36,22 @@ while usuario:
     opcion = input("Ingrese una opción: ")
     if opcion == "1":
         registrar_gasto(usuario)
+    if opcion == "2":
+        listar_gastos(usuario)
+    if opcion == "3":
+        print("Función de calcular total de gastos no implementada.")
+    if opcion == "4":
+        print("Función de generar reporte de gastos no implementada.")
+    if opcion == "5":
+        print("Estas seguro que desea salir? (S/N): ")
+        salir = input().strip().lower()
+        if salir == "s":
+            print("Saliendo del sistema...")
+            break
+        else:
+            print("Regresando al menú principal...")
 
+        
 
 
 

@@ -1,5 +1,6 @@
 import json
 import datetime
+from tabulate import tabulate
 file_path="Data/content.json"
 
 def leer_data():
@@ -84,10 +85,12 @@ def registrar_gasto(usuario):
 
 
     nuevo_gasto = {
-        "monto": monto,
-        "categoria": categoria,
-        "descripcion": descripcion
-    }
+    "monto": monto,
+    "categoria": categoria,
+    "descripcion": descripcion,
+    "fecha": str(datetime.date.today())  
+}
+
 
     
     for user in datos["usuarios"]:
@@ -125,5 +128,38 @@ def listar_gastos(usuario):
         for gasto in usuario["gastos"]:
             if gasto['categoria'] == categoria:
                 print(f"- Monto:{gasto['monto']}, Descripción: {gasto['descripcion']}")
+    elif option == "3":
+        fecha_inicial = input("Ingrese la fecha inicial para hacer la busqueda (YYYY-MM-DD): ")
+        fecha_final = input("Ingrese la fecha final para hacer la busqueda (YYYY-MM-DD): ")
+        try:
+            fecha_inicio = datetime.strptime(fecha_inicial, "%Y-%m-%d").date()
+            fecha_fin = datetime.strptime(fecha_final, "%Y-%m-%d").date()
+        except ValueError:
+            print("Formato de fecha inválido. Usa el formato YYYY-MM-DD.")
+            return
+        gastos_listados = []
+        for gasto in usuario["gastos"]:
+            fecha_gasto = datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
+            if fecha_inicio <= fecha_gasto <= fecha_fin:
+                gastos_listados.append(gasto)
+            if gastos_listados:
+                print("Gastos en el rango de fechas:")
+                for gasto in gastos_listados:
+                    print(f"- Monto:{gasto['monto']}, Categoría: {gasto['categoria']}, Descripción: {gasto['descripcion']}")
+            else:
+                print("No hay gastos registrados en este rango de fechas.")       
+    elif option == "4":
+        print("Regresando al menú principal...")
+    else:
+        print("Opción inválida. Por favor, seleccione una opción válida.")
+        print("=============================================")
+
+       
+        
+
+    
+
+   
+
     
     
