@@ -37,22 +37,22 @@ Proyecto_Python_UribeSantiago/
 - El usuario podra, una vez iniciado sesion o registrarse ingresar un nuevo gasto, su monto, su categoria y de forma opcional una breve descrión.
 - Dicha informacion se almacenara en un archivo JSON junto con la informacion del usuario.
 
-### Listado de gastos 📜
+### 📜 Listado de gastos 
 - El usuario podra escoger de que manera deseara visualizar sus datos.
 - Mediante el uso de categorias fechas y o descripciones ademas de poder verlos todos a la vez.
 
-### Calcular datos totales y/o por categoria ☑
+### ☑ Calcular datos totales y/o por categoria 
 - Calcula el total de gastos diarios, semanales o mensuales.
 - Muestra el gasto acumulado por categoría.
 
-### Generacion de reportes ❗❗❗
+### ❗❗❗ Generacion de reportes 
 - Muestra un resumen de los gastos diarios, semanales o mensuales.
 - El reporte puede visualizarse o guardarse en un archivo JSON.
 
-### Guardar y Cargar Datos 🎦
+### 🎦 Guardar y Cargar Datos 
 - La aplicación carga automáticamente los datos del archivo JSON al iniciar.
 - Guarda automáticamente los nuevos registros al cerrar o modificar la información.
 
-### Actualizar y o borrar datos 🦾 / 🗑
+### 🦾 / 🗑 Actualizar y o borrar datos 
 - El usuario podra acceder a sus gastos ya guardados ademas de poder actualizarlos y o borrar 
 - Dichos cambios quedaran guardados dentro de un archivo JSON
