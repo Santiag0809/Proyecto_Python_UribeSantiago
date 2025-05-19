@@ -1,4 +1,4 @@
-from register import registrar_usuario, usuario_existente, iniciar_sesion, registrar_gasto, listar_gastos
+from register import*
 
 print("Bienvenido al sistema de registro de usuarios")
 print("1. Registrar usuario")
@@ -30,7 +30,8 @@ while usuario:
     print("2. Listar gastos")
     print("3. Calcular total de gastos")
     print("4. Generar reporte de gastos")
-    print("5. Salir")
+    print("5. Actualar o borrar gastos de usuario")
+    print("6. Salir")
     print("=============================================")
 
     opcion = input("Ingrese una opción: ")
@@ -39,10 +40,12 @@ while usuario:
     if opcion == "2":
         listar_gastos(usuario)
     if opcion == "3":
-        print("Función de calcular total de gastos no implementada.")
+        calcular_totales(usuario)
     if opcion == "4":
         print("Función de generar reporte de gastos no implementada.")
     if opcion == "5":
+        print("Función de actualizar o borrar gastos no implementada.")
+    if opcion == "6":
         print("Estas seguro que desea salir? (S/N): ")
         salir = input().strip().lower()
         if salir == "s":

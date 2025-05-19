@@ -159,7 +159,33 @@ def listar_gastos(usuario):
     else:
         print("Opción inválida. Por favor, seleccione una opción válida.")
 
-       
+def calcular_totales(usuario):
+    if "gastos" not in usuario or not usuario["gastos"]:
+        print("No hay gastos registrados.")
+        return
+
+    print("=============================================")
+    print("         Calcular Total de Gastos")
+    print("=============================================")
+    print("1. Total general")
+    print("2. Total por categoría")
+    print("3. Regresar al menú principal")
+    print("=============================================")
+
+    opcion = input("Seleccione una opción: ")      
+    if opcion == "1":
+        total_general = sum(gasto["monto"] for gasto in usuario["gastos"])
+        print(f"Total general de gastos: {total_general}")
+
+    elif opcion == "2":
+        categoria = input("Ingrese la categoría para calcular el total: ")
+        total_categoria = sum(gasto["monto"] for gasto in usuario["gastos"] if gasto["categoria"].lower() == categoria.lower())
+        print(f"Total de gastos en la categoría '{categoria}': {total_categoria}")
+
+    elif opcion == "3":
+        print("Regresando al menú principal...")
+    else:
+        print("Opción inválida. Por favor, seleccione una opción válida.")
         
 
     
