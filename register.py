@@ -69,14 +69,11 @@ def usuario_existente(email):
                 return True
     return False
 
-def registrar_gasto():
-    
-    datos = leer_data
-    usuario = datos["usuarios"]
-    listaGastos = usuario["gastos"]
+def registrar_gasto(usuario):
+    email = usuario["email"]  
+    datos = leer_data()
+    usuario = usuario_existente(email)  
 
-    
-    
     print("=============================================")
     print("         Registrar Nuevo Gasto               ")
     print("=============================================")
@@ -84,38 +81,32 @@ def registrar_gasto():
     monto = float(input("Ingrese el monto del gasto: "))
     categoria = input("En qué categoría entra el gasto (ej. comida, transporte, etc.): ")
     desea = input("¿Desea agregar una descripción? (S/N): ").strip().lower()
-    
+
     if desea == "s":
         descripcion = input("Agregue una descripción corta del gasto: ")
     else:
         descripcion = ""
 
-
     nuevo_gasto = {
-    "monto": monto,
-    "categoria": categoria,
-    "descripcion": descripcion,
-    "fecha": str(datetime.date.today())
+        "monto": monto,
+        "categoria": categoria,
+        "descripcion": descripcion,
+        "fecha": str(datetime.date.today())
     }
 
-    
-   
-    listaGastos.append(nuevo_gasto)
-    usuario["gastos"]= listaGastos
-    datos["usuario"]= usuario
+    for user in datos["usuarios"]:
+        if user["email"] == email:
+            user["gastos"].append(nuevo_gasto)
+            break
 
     guardar_data(datos)
-    print("Gasto registrado cajasanmente.")
+    print("Gasto registrado exitosamente.")
 
 
 def listar_gastos(usuario):
-
-    data = leer_data
-    usuario = data["usuarios"]
-    listaGastos = usuario["gastos"]
-    
-    print(listaGastos)
-
+    if not usuario["gastos"]:
+        print("No hay gastos registrados.")
+        return
     print("=============================================")
     print("               Listar Gastos                 ")
     print("=============================================")
@@ -129,8 +120,7 @@ def listar_gastos(usuario):
 
     if option == "1":
         print("Gastos registrados hasta la fecha:")
-        
-        verTodosGastos()
+        verTodosGastos(usuario)
 
     elif option == "2":
         categoria = input("Ingrese la categoría por la que desea filtrar: ")
@@ -167,6 +157,7 @@ def listar_gastos(usuario):
         print("Regresando al menú principal...")
     else:
         print("Opción inválida. Por favor, seleccione una opción válida.")
+
 
 def calcular_totales(usuario):
     if "gastos" not in usuario or not usuario["gastos"]:
