@@ -189,17 +189,19 @@ def calcular_totales(usuario):
 
     elif opcion == "2":
         categoria = input("Ingrese la categoría para calcular el total: ")
-        total_categoria = sum(gasto["monto"] for gasto in usuario["gastos"] if gasto["categoria"].lower() == categoria.lower())
+        total_categoria = sum(
+            gasto["monto"] for gasto in usuario["gastos"]
+            if gasto["categoria"].lower() == categoria.lower()
+        )
         print(f"Total de gastos en la categoría '{categoria}': {total_categoria}")
 
     elif opcion == "3":
         print("Regresando al menú principal...")
     else:
         print("Opción inválida. Por favor, seleccione una opción válida.")
+
         
 def verTodosGastos():
-
-        datos = leer_data() 
-        listaGAstos = datos["usuario"]["gastos"]
-        print(tabulate(listaGAstos, headers="keys", tablefmt="grid"))
-
+    datos = leer_data() 
+    listaGastos = datos["usuario"]["gastos"]
+    print(tabulate(listaGastos, headers="keys", tablefmt="grid"))
