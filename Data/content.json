@@ -1,21 +1,15 @@
 {
     "usuarios": [
         {
-            "nombre": "Probando",
-            "apellido": "Prueba",
-            "email": "probando@gmail.com",
+            "nombre": "JuanPedro",
+            "apellido": "Pedro",
+            "email": "probando123@gmail.com",
             "password": "123",
             "gastos": [
                 {
-                    "monto": 6000.0,
-                    "categoria": "Comidita",
-                    "descripcion": "Almuerzo de hoy - 2k que me regalaron",
-                    "fecha": "2025-05-20"
-                },
-                {
-                    "monto": 120000.0,
-                    "categoria": "Zapatos",
-                    "descripcion": "Primera cuota jordans",
+                    "monto": 19000.0,
+                    "categoria": "Otros",
+                    "descripcion": "Gastos en juegos",
                     "fecha": "2025-05-20"
                 }
             ]

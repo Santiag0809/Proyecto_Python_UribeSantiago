@@ -104,9 +104,19 @@ def registrar_gasto(usuario):
 
 
 def listar_gastos(usuario):
-    if not usuario["gastos"]:
+    datos = leer_data()
+    email = usuario["email"]
+
+    usuario_actualizado = None
+    for i in datos["usuarios"]:
+        if i["email"] == email:
+            usuario_actualizado = i
+            break
+
+    if not usuario_actualizado or not usuario_actualizado.get("gastos"):
         print("No hay gastos registrados.")
         return
+
     print("=============================================")
     print("               Listar Gastos                 ")
     print("=============================================")
@@ -120,11 +130,11 @@ def listar_gastos(usuario):
 
     if option == "1":
         print("Gastos registrados hasta la fecha:")
-        verTodosGastos(usuario)
+        print(tabulate(usuario_actualizado["gastos"], headers="keys", tablefmt="grid"))
 
     elif option == "2":
         categoria = input("Ingrese la categoría por la que desea filtrar: ")
-        filtrados = [g for g in usuario["gastos"] if g["categoria"].lower() == categoria.lower()]
+        filtrados = [gastos_v for gastos_v in usuario_actualizado["gastos"] if gastos_v["categoria"].lower() == categoria.lower()]
         if filtrados:
             print(f"Gastos en la categoría '{categoria}':")
             print(tabulate(filtrados, headers="keys", tablefmt="grid"))
@@ -142,7 +152,7 @@ def listar_gastos(usuario):
             return
 
         filtrados = []
-        for gasto in usuario["gastos"]:
+        for gasto in usuario_actualizado["gastos"]:
             gasto_fecha = datetime.datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
             if fecha_inicio <= gasto_fecha <= fecha_fin:
                 filtrados.append(gasto)
