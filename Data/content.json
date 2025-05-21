@@ -1,28 +1,16 @@
 {
     "usuarios": [
         {
-            "nombre": "Hola",
-            "apellido": "Adios",
-            "email": "pruebas@gmail.com",
+            "nombre": "Santiago",
+            "apellido": "Uribe",
+            "email": "santiago@gmail.com",
             "password": "123",
             "gastos": [
                 {
-                    "monto": 12000.0,
-                    "categoria": "Comelona",
-                    "descripcion": "Hamburguesa con papitas ",
-                    "fecha": "2025-05-20"
-                },
-                {
-                    "monto": 18900.0,
+                    "monto": 19700.0,
                     "categoria": "Comida",
-                    "descripcion": "Desayuno y lonchera",
-                    "fecha": "2025-05-21"
-                },
-                {
-                    "monto": 24500.0,
-                    "categoria": "Transporte",
-                    "descripcion": "Uber y taxis",
-                    "fecha": "2025-05-21"
+                    "descripcion": "Desayuno + Lonchera",
+                    "fecha": " 2025-05-19"
                 }
             ]
         }

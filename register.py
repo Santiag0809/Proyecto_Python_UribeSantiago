@@ -80,42 +80,37 @@ def registrar_gasto(usuario):
     monto = float(input("Ingrese el monto del gasto: "))
     categoria = input("En qué categoría entra el gasto (ej. comida, transporte, etc.): ")
     desea = input("¿Desea agregar una descripción? (S/N): ").strip().lower()
-    fecha_diferente = input("Desea agregar una fecha diferente a la del dia de hoy? (S/N): ").strip().lower()
-    if fecha_diferente == "s":
-        fecha_diferente=input("Ingrese la fecha a añadir en este formato (YYYY-MM-DD)")
-        try: 
-         fecha_diferente=datetime.datetime.strptime(fecha_diferente, "%Y-%m-%d").date()
-        except ValueError:
-            print("El formato de fecha no validado, intentelo de nuevo") 
-        nuevo_gasto = {
-        "monto": monto,
-        "categoria": categoria,
-        "descripcion": descripcion,
-        "fecha": fecha_diferente
-    }    
-    if fecha_diferente =="n":
-        nuevo_gasto = {
-        "monto": monto,
-        "categoria": categoria,
-        "descripcion": descripcion,
-        "fecha": str(datetime.date.today())
-    }
-
 
     if desea == "s":
         descripcion = input("Agregue una descripción corta del gasto: ")
     else:
         descripcion = ""
-
     
+    fecha_diferente = input("Desea agregar una fecha diferente a la del dia de hoy? (S/N): ").strip().lower()
 
+    if fecha_diferente == "s":
+        fecha=input("Ingrese la fecha a añadir en este formato (YYYY-MM-DD)")
+        try: 
+         fecha=datetime.datetime.strptime(fecha_diferente, "%Y-%m-%d").date()
+        except ValueError:
+            print("El formato de fecha no validado, intentelo de nuevo") 
+    else:
+        fecha = datetime.date.today()   
+
+    nuevo_gasto = {
+        "monto": monto,
+        "categoria": categoria,
+        "descripcion": descripcion,
+        "fecha": fecha
+    }    
+    
     for user in datos["usuarios"]:
         if user["email"] == email:
             user["gastos"].append(nuevo_gasto)
             break
 
     guardar_data(datos)
-    print("Gasto registrado exitosamente.")
+    print("Gasto registrado cajasanmente.")
 
 def listar_gastos(usuario):
     datos = leer_data()
@@ -187,7 +182,6 @@ def listar_gastos(usuario):
         else:
             print("Opción inválida. Por favor, seleccione una opción válida.")
     
-
 def calcular_totales(usuario):
     email = usuario["email"]
     datos = leer_data()
@@ -229,9 +223,6 @@ def calcular_totales(usuario):
         else:
             print("Opción inválida. Sellecione otra opción.")
 
-
-    
-        
 def verTodosGastos():
     datos = leer_data() 
     listaGastos = datos["usuario"]["gastos"]
@@ -297,9 +288,6 @@ def generar_Reporte(usuario):
         else:
             print("Opción inválida.")
         
-
-
-
 def borrar_actualizar(usuario):
     email = usuario["email"]
     datos = leer_data()
