@@ -11,34 +11,18 @@
                     "categoria": "Comelona",
                     "descripcion": "Hamburguesa con papitas ",
                     "fecha": "2025-05-20"
-                }
-            ]
-        },
-        {
-            "nombre": "Juancho",
-            "apellido": "Pedro",
-            "email": "otraprueba@gmail.com",
-            "password": "5",
-            "gastos": [
+                },
                 {
-                    "monto": 16000.0,
-                    "categoria": "Otros",
-                    "descripcion": "Probando",
-                    "fecha": "2025-05-20"
-                }
-            ]
-        },
-        {
-            "nombre": "Santiago",
-            "apellido": "Garcia",
-            "email": "santiago@gmail.com",
-            "password": "123456",
-            "gastos": [
-                {
-                    "monto": 18000.0,
+                    "monto": 18900.0,
                     "categoria": "Comida",
-                    "descripcion": "Empana y gaseosa/Brownie y leche",
-                    "fecha": "2025-05-20"
+                    "descripcion": "Desayuno y lonchera",
+                    "fecha": "2025-05-21"
+                },
+                {
+                    "monto": 24500.0,
+                    "categoria": "Transporte",
+                    "descripcion": "Uber y taxis",
+                    "fecha": "2025-05-21"
                 }
             ]
         }

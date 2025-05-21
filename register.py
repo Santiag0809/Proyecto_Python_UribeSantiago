@@ -183,33 +183,38 @@ def calcular_totales(usuario):
         if not usuario_actualizado ("gastos"):
             print("No hay gastos registrados.")
         return
+    
+    while True:
+        print("=============================================")
+        print("         Calcular Total de Gastos")
+        print("=============================================")
+        print("1. Total general")
+        print("2. Total por categoría")
+        print("3. Regresar al menú principal")
+        print("=============================================")
 
-    print("=============================================")
-    print("         Calcular Total de Gastos")
-    print("=============================================")
-    print("1. Total general")
-    print("2. Total por categoría")
-    print("3. Regresar al menú principal")
-    print("=============================================")
+        opcion = input("Seleccione una opción: ")      
 
-    opcion = input("Seleccione una opción: ")      
+        if opcion == "1":
+         total_general = sum(g["monto"] for g in usuario_actualizado["gastos"])
+         print(f"Total general de gastos: ${total_general:.2f}")
 
-    if opcion == "1":
-        total_general = sum(g["monto"] for g in usuario_actualizado["gastos"])
-        print(f"Total general de gastos: ${total_general:.2f}")
-
-    elif opcion == "2":
-        categoria = input("Ingrese la categoría para calcular el total: ")
-        total_categoria = sum(
-            g["monto"] for g in usuario_actualizado["gastos"]
-            if g["categoria"].lower() == categoria.lower()
+        elif opcion == "2":
+         categoria = input("Ingrese la categoría para calcular el total: ")
+         total_categoria = sum(
+         g["monto"] for g in usuario_actualizado["gastos"]
+        if g["categoria"].lower() == categoria.lower()
         )
-        print(f"Total de gastos en la categoría '{categoria}': ${total_categoria:.2f}")
+         print(f"Total de gastos en la categoría '{categoria}': ${total_categoria:.2f}")
+         
+        elif opcion == "3":
+            print("Regresando al menú principal...")
+            break
+        else:
+            print("Opción inválida. Sellecione otra opción.")
 
-    elif opcion == "3":
-        print("Regresando al menú principal...")
-    else:
-        print("Opción inválida. Sellecione otra opción.")
+
+    
         
 def verTodosGastos():
     datos = leer_data() 
@@ -255,6 +260,7 @@ def generar_Reporte(usuario):
             gasto_fecha = datetime.datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
             if gasto_fecha == fecha:
                 reporte_diario.append(gasto)
+                
 
         if not reporte_diario:
             print("No hay gastos registrados ese día.")
@@ -269,10 +275,24 @@ def generar_Reporte(usuario):
             print("Reporte diario:")
             print(tabulate(reporte_diario, headers="keys", tablefmt="grid"))
         elif opcion_opcion == "2":
-            with open("reporte_diario.txt", "w") as file:
-                file.write(tabulate(reporte_diario, headers="keys", tablefmt="grid"))
-            print("Reporte guardado en 'reporte_diario.txt'")
+            with open("reporte_diario.json", "w") as file:
+                file.write(str(reporte_diario))
+            print("Reporte guardado en 'reporte_diario.json'")
         else:
             print("Opción inválida.")
 
-                   
+def borrar_actualizar(usuario):
+    email = usuario["email"]
+    datos = leer_data()
+    usuario_a = None
+
+    for i in datos["usuarios"]:
+        if i["email"] == email:
+            usuario_a = i
+            break
+
+    if not usuario_a or "gastos" not in usuario_a or not usuario_a["gastos"]:
+        print("Lo siento amiguito, no hay gastos registrados.")
+        return
+    
+                     
