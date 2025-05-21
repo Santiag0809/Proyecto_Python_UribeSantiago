@@ -1,15 +1,29 @@
 {
     "usuarios": [
         {
-            "nombre": "JuanPedro",
-            "apellido": "Pedro",
-            "email": "probando123@gmail.com",
+            "nombre": "Hola",
+            "apellido": "Adios",
+            "email": "pruebas@gmail.com",
             "password": "123",
             "gastos": [
                 {
-                    "monto": 19000.0,
+                    "monto": 12000.0,
+                    "categoria": "Comelona",
+                    "descripcion": "Hamburguesa con papitas ",
+                    "fecha": "2025-05-20"
+                }
+            ]
+        },
+        {
+            "nombre": "Juancho",
+            "apellido": "Pedro",
+            "email": "otraprueba@gmail.com",
+            "password": "5",
+            "gastos": [
+                {
+                    "monto": 16000.0,
                     "categoria": "Otros",
-                    "descripcion": "Gastos en juegos",
+                    "descripcion": "Probando",
                     "fecha": "2025-05-20"
                 }
             ]

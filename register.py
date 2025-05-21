@@ -110,10 +110,10 @@ def listar_gastos(usuario):
         if i["email"] == email:
             usuario_actualizado = i
             break
-
-    if not usuario_actualizado ("gastos"):
-        print("No hay gastos registrados.")
+    if not usuario_actualizado ["gastos"]:
+        print("Lo siento amiguito, no hay gastos registrados")
         return
+
 
     print("=============================================")
     print("               Listar Gastos                 ")
@@ -125,10 +125,10 @@ def listar_gastos(usuario):
     print("4. Regresar al menú principal")
     print("=============================================")
     option = input("Ingrese una opción numérica: ")
-
     if option == "1":
         print("Gastos registrados hasta la fecha:")
         print(tabulate(usuario_actualizado["gastos"], headers="keys", tablefmt="grid"))
+        return
 
     elif option == "2":
         categoria = input("Ingrese la categoría por la que desea filtrar: ")
@@ -174,8 +174,8 @@ def calcular_totales(usuario):
         if u["email"] == email:
             usuario_actualizado = u
             break
-    if not usuario_actualizado or not usuario_actualizado.get("gastos"):
-        print("No hay gastos registrados.")
+        if not usuario_actualizado ("gastos"):
+            print("No hay gastos registrados.")
         return
 
     print("=============================================")
