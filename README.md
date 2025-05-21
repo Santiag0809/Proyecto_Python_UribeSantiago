@@ -8,6 +8,27 @@ Muchos usuarios desean llevar un registro de sus gastos, pero las aplicaciones d
 
 Con el Simulador de Gasto Diario, los usuarios pueden organizar sus gastos de forma práctica y recibir una visión clara de su situación financiera diaria, semanal o mensual.
 
+## Tabla de contenidos
+---
+- 🛠️ Tecnologías y Herramientas
+- 📂 Estructura del Proyecto
+
+**Funciones principales del programa**
+ - 🤑 Registro de gastos
+ - 📜 Listado de gastos 
+ - ☑ Calcular datos totales y/o por categoria 
+ - ❗❗❗ Generacion de reportes 
+ - 🎦 Guardar y Cargar Datos 
+ - 🦾 / 🗑 Actualizar y o borrar datos 
+
+- 📦 Requisitos e Instalación
+- 📚 Librerías necesarias
+- ### 📥 Instalación
+- ### 🥂 Ejecucion del programa 
+
+
+
+
 ---
 
 ## 🛠️ Tecnologías y Herramientas
