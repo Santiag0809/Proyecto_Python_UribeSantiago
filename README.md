@@ -58,3 +58,39 @@ Proyecto_Python_UribeSantiago/
 ### 🦾 / 🗑 Actualizar y o borrar datos 
 - El usuario podra acceder a sus gastos ya guardados ademas de poder actualizarlos y o borrar .
 - Dichos cambios quedaran guardados dentro de un archivo JSON.
+
+## 📦 Requisitos e Instalación
+
+Recuerda que antes de ejecutar este programa para evitar errores revisar la version de python **Python3.8 o superiores**
+
+### 📚 Librerías necesarias
+
+Este proyecto usa la siguiente libreria :
+
+- [tabulate](https://pypi.org/project/tabulate/) — para mostrar datos y o informacion en manera de tabla
+
+### 📥 Instalación
+
+Puedes instalar las dependencias con el siguiente comando:
+
+```bash
+pip install tabulate
+```
+### 🥂 Ejecucion del programa 
+
+- Clonar Repositorio
+```bash
+git clone https://github.com/USUARIO/Proyecto_Python_NombreApellido.git
+```
+- Entrar a la carpeta del repositorio clonado
+```bash
+cd Proyecto_Python_NombreApellido
+```
+- Entrar a la carpeta del repositorio clonado
+```bash
+cd Proyecto_Python_NombreApellido
+```
+- Ejecutar el archivo principal (main.py)
+```bash
+python Main/main.py
+```

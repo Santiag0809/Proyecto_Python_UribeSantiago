@@ -42,7 +42,6 @@ def registrar_usuario():
     usuario_actual = nuevo_usuario
     return usuario_actual
 
-
 def iniciar_sesion():
     datos = leer_data()
 
@@ -102,7 +101,6 @@ def registrar_gasto(usuario):
     guardar_data(datos)
     print("Gasto registrado exitosamente.")
 
-
 def listar_gastos(usuario):
     datos = leer_data()
     email = usuario["email"]
@@ -113,7 +111,7 @@ def listar_gastos(usuario):
             usuario_actualizado = i
             break
 
-    if not usuario_actualizado or not usuario_actualizado.get("gastos"):
+    if not usuario_actualizado ("gastos"):
         print("No hay gastos registrados.")
         return
 
@@ -168,7 +166,6 @@ def listar_gastos(usuario):
     else:
         print("Opción inválida. Por favor, seleccione una opción válida.")
 
-
 def calcular_totales(usuario):
     email = usuario["email"]
     datos = leer_data()
@@ -207,10 +204,56 @@ def calcular_totales(usuario):
         print("Regresando al menú principal...")
     else:
         print("Opción inválida. Sellecione otra opción.")
-
-
         
 def verTodosGastos():
     datos = leer_data() 
     listaGastos = datos["usuario"]["gastos"]
     print(tabulate(listaGastos, headers="keys", tablefmt="grid"))
+
+def generar_Reporte():
+    email="usuario"
+    datos = leer_data()
+    usuario_ac = None
+    for i in datos["usuarios"]:
+        if i["email"] == email:
+            usuario_ac = i
+            break
+    if not usuario_ac ("gastos"):
+        print("No hay gastos registrados.")
+        return
+    print("=============================================")
+    print("         Generar Reporte de Gastos           ")
+    print("=============================================")
+    print("Seleccione el tipo de reporte:")
+    print("1. Reporte diario")
+    print("2. Reporte semanal")
+    print("3. Reporte mensual")
+    print("4. Ir al menú principal")
+    print("=============================================")
+    opcion = input("Ingrese una opción numérica: ")
+    if opcion == "1":
+        fecha_reporte = input("Ingrese la fecha en este formato (YYYY-MM-DD)  : ")
+        try:
+            fecha = datetime.datetime.strptime(fecha_reporte, "%Y-%m-%d").date()
+        except ValueError:
+            print("Formato de fecha inválido o erroneo. Usa el formato YYYY-MM-DD.")
+            return
+        reporte_diario = []
+        for gasto in usuario_ac["gastos"]:
+            gasto_fecha = datetime.datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
+            if gasto_fecha == fecha:
+                reporte_diario.append(gasto)
+            print("Como desea ver el reporte?")
+            print("1. En pantalla")
+            print("2. Guardar en archivo")
+            opcion_opcion = input("Ingrese una opción numérica: ")
+            if opcion_opcion == "1":
+                print("Reporte diario:")
+                print(tabulate(reporte_diario, headers="keys", tablefmt="grid"))
+            elif opcion_opcion == "2":
+                with open("reporte_diario.txt", "w") as file:
+                    file.write(tabulate(reporte_diario, headers="keys", tablefmt="grid"))
+                print("Reporte guardado en 'reporte_diario.txt'")
+            else:
+                print("Opción inválida. Por favor, seleccione una opción válida.")
+                   
