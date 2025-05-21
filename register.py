@@ -89,20 +89,22 @@ def registrar_gasto(usuario):
     fecha_diferente = input("Desea agregar una fecha diferente a la del dia de hoy? (S/N): ").strip().lower()
 
     if fecha_diferente == "s":
-        fecha=input("Ingrese la fecha a añadir en este formato (YYYY-MM-DD): ")
-        try: 
-         fecha=datetime.datetime.strptime(fecha_diferente, "%Y-%m-%d").date()
-        except ValueError:
-            print("El formato de fecha no validado, intentelo de nuevo") 
+     fecha_input = input("Ingrese la fecha a añadir en este formato (YYYY-MM-DD): ")
+     try:
+        fecha = datetime.datetime.strptime(fecha_input, "%Y-%m-%d").date()
+     except ValueError:
+        print("El formato de fecha no es válido. Inténtelo de nuevo.")
+        return
     else:
-        fecha = datetime.date.today()   
-
+        fecha = datetime.date.today()
+    
     nuevo_gasto = {
-        "monto": monto,
+        "monto":monto,
         "categoria": categoria,
         "descripcion": descripcion,
-        "fecha": fecha
-    }    
+        "fecha": str(fecha)
+    }
+
     
     for user in datos["usuarios"]:
         if user["email"] == email:
@@ -256,37 +258,39 @@ def generar_Reporte(usuario):
 
     if opcion == "1":
         fecha_dia = datetime.date.today()
-        gastos_dia = []
+    gastos_dia = []
 
-        for gastito in usuario["gastos"]:
-            fecha_ver = datetime.datetime.strptime(gastito["fecha"], "%Y-%m-%d").date()
-            if fecha_ver == fecha_dia:
-                gastos_dia.append(gastito)
+    for gastito in usuario["gastos"]:
+        fecha_ver = datetime.datetime.strptime(gastito["fecha"], "%Y-%m-%d").date()
+        if fecha_ver == fecha_dia:
+            gastos_dia.append(gastito)
+
     if not gastos_dia:
-        print ("No has hecho ningun gasto el dia de hoy amiguito")
+        print("No has hecho ningún gasto el día de hoy, amiguito.")
+        return
 
+    print("¿Cómo desea ver el reporte?")
+    print("1. En pantalla")
+    print("2. Guardar en archivo")
+    opcion_opcion = input("Ingrese una opción numérica: ")
 
-        print("¿Cómo desea ver el reporte?")
-        print("1. En pantalla")
-        print("2. Guardar en archivo")
-        opcion_opcion = input("Ingrese una opción numérica: ")
+    if opcion_opcion == "1":
+        print("Reporte diario:")
+        print(tabulate(gastos_dia, headers="keys", tablefmt="grid"))
 
-        if opcion_opcion == "1":
-            print("Reporte diario:")
-            print(tabulate(gastos_dia, headers="keys", tablefmt="grid"))
-            
-        elif opcion_opcion == "2":
-            if "reportes" not in usuario:
-                usuario["reportes"] = {}
-            
-        usuario["reportes"]["diario"]= {
+    elif opcion_opcion == "2":
+        if "reportes" not in usuario:
+            usuario["reportes"] = {}
+
+        usuario["reportes"]["diario"] = {
             "fecha": str(fecha_dia),
-            "gastos": gastito
-            
+            "gastos": gastos_dia
         }
-        with open ("data/content.json", "w") as carpetita:
-            return json.dump(datos,carpetita, indent=4)
-        print("Listo amiguito hemos guardado tu reporte en content.json")
+
+        with open("data/content.json", "w") as archivo:
+            json.dump(datos, archivo, indent=4)
+        print("Listo amiguito, hemos guardado tu reporte en content.json")
+
                    
 def borrar_actualizar(usuario):
     email = usuario["email"]

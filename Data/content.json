@@ -1,3 +1,30 @@
 {
-    
+    "usuarios": [
+        {
+            "nombre": "Santiago",
+            "apellido": "Uribe",
+            "email": "ejemplo@gmail.com",
+            "password": "123",
+            "gastos": [
+                {
+                    "monto": 16900.0,
+                    "categoria": "Spotify",
+                    "descripcion": "",
+                    "fecha": "2025-05-19"
+                },
+                {
+                    "monto": 24000.0,
+                    "categoria": "Comida",
+                    "descripcion": "Almuerzo y helado",
+                    "fecha": "2025-05-20"
+                },
+                {
+                    "monto": 9500.0,
+                    "categoria": "Comida",
+                    "descripcion": "Lonche del dia de hoy en campus",
+                    "fecha": "2025-05-21"
+                }
+            ]
+        }
+    ]
 }
