@@ -14,12 +14,12 @@ Con el Simulador de Gasto Diario, los usuarios pueden organizar sus gastos de fo
 - [📂 Estructura del Proyecto](#-estructura-del-proyecto)
 
 - [Funciones principales del programa](#funciones-principales-del-programa)
- - 🤑 Registro de gastos
- - 📜 Listado de gastos 
- - ☑ Calcular datos totales y/o por categoria 
- - ❗❗❗ Generacion de reportes 
- - 🎦 Guardar y Cargar Datos 
- - 🦾 / 🗑 Actualizar y o borrar datos 
+  - 🤑 Registro de gastos
+  - 📜 Listado de gastos 
+  - ☑ Calcular datos totales y/o por categoria 
+  - ❗❗❗ Generacion de reportes 
+  - 🎦 Guardar y Cargar Datos 
+  - 🦾 / 🗑 Actualizar y o borrar datos 
 
 - [📦 Requisitos e Instalación](#-requisitos-e-instalación)
 - [📚 Librerías necesarias](#-librerías-necesarias)
