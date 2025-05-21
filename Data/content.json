@@ -27,6 +27,20 @@
                     "fecha": "2025-05-20"
                 }
             ]
+        },
+        {
+            "nombre": "Santiago",
+            "apellido": "Garcia",
+            "email": "santiago@gmail.com",
+            "password": "123456",
+            "gastos": [
+                {
+                    "monto": 18000.0,
+                    "categoria": "Comida",
+                    "descripcion": "Empana y gaseosa/Brownie y leche",
+                    "fecha": "2025-05-20"
+                }
+            ]
         }
     ]
 }

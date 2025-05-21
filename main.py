@@ -42,7 +42,7 @@ while usuario:
     if opcion == "3":
         calcular_totales(usuario)
     if opcion == "4":
-        generar_Reporte()
+        generar_Reporte(usuario)
     if opcion == "5":
         print("Función de actualizar o borrar gastos no implementada.")
     if opcion == "6":

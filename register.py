@@ -113,58 +113,64 @@ def listar_gastos(usuario):
     if not usuario_actualizado ["gastos"]:
         print("Lo siento amiguito, no hay gastos registrados")
         return
+    retorno=True
+    while True:
+        print("=============================================")
+        print("               Listar Gastos                 ")
+        print("=============================================")
+        print("Seleccione una opción para filtrar los gastos:")
+        print("1. Ver todos los gastos")
+        print("2. Filtrar por categoría")
+        print("3. Filtrar por rango de fechas")
+        print("4. Regresar al menú principal")
+        print("=============================================")
+        option = input("Ingrese una opción numérica: ")
 
+        if option == "1":
+            print("Gastos registrados hasta la fecha:")
+            print(tabulate(usuario_actualizado["gastos"], headers="keys", tablefmt="grid"))
 
-    print("=============================================")
-    print("               Listar Gastos                 ")
-    print("=============================================")
-    print("Seleccione una opción para filtrar los gastos:")
-    print("1. Ver todos los gastos")
-    print("2. Filtrar por categoría")
-    print("3. Filtrar por rango de fechas")
-    print("4. Regresar al menú principal")
-    print("=============================================")
-    option = input("Ingrese una opción numérica: ")
-    if option == "1":
-        print("Gastos registrados hasta la fecha:")
-        print(tabulate(usuario_actualizado["gastos"], headers="keys", tablefmt="grid"))
-        return
+        elif option == "2":
+            categoria = input("Ingrese la categoría por la que desea filtrar: ")
+            filtrados = [
+                g for g in usuario_actualizado["gastos"]
+                if g["categoria"].lower() == categoria.lower()
+            ]
+            if filtrados:
+                print(f"Gastos en la categoría '{categoria}':")
+                print(tabulate(filtrados, headers="keys", tablefmt="grid"))
+            else:
+                print("No hay gastos registrados en esta categoría.")
 
-    elif option == "2":
-        categoria = input("Ingrese la categoría por la que desea filtrar: ")
-        filtrados = [gastos_v for gastos_v in usuario_actualizado["gastos"] if gastos_v["categoria"].lower() == categoria.lower()]
-        if filtrados:
-            print(f"Gastos en la categoría '{categoria}':")
-            print(tabulate(filtrados, headers="keys", tablefmt="grid"))
+        elif option == "3":
+            fecha_inicial = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
+            fecha_final = input("Ingrese la fecha final (YYYY-MM-DD): ")
+            try:
+                fecha_inicio = datetime.datetime.strptime(fecha_inicial, "%Y-%m-%d").date()
+                fecha_fin = datetime.datetime.strptime(fecha_final, "%Y-%m-%d").date()
+            except ValueError:
+                print("Formato de fecha inválido. Usa el formato YYYY-MM-DD.")
+                continue
+
+            filtrados = []
+            for gasto in usuario_actualizado["gastos"]:
+                gasto_fecha = datetime.datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
+                if fecha_inicio <= gasto_fecha <= fecha_fin:
+                    filtrados.append(gasto)
+
+            if filtrados:
+                print(f"Gastos entre {fecha_inicial} y {fecha_final}:")
+                print(tabulate(filtrados, headers="keys", tablefmt="grid"))
+            else:
+                print("No hay gastos en ese rango de fechas.")
+
+        elif option == "4":
+            print("Regresando al menú principal...")
+            break  
+
         else:
-            print("No hay gastos registrados en esta categoría.")
-
-    elif option == "3":
-        fecha_inicial = input("Ingrese la fecha inicial (YYYY-MM-DD): ")
-        fecha_final = input("Ingrese la fecha final (YYYY-MM-DD): ")
-        try:
-            fecha_inicio = datetime.datetime.strptime(fecha_inicial, "%Y-%m-%d").date()
-            fecha_fin = datetime.datetime.strptime(fecha_final, "%Y-%m-%d").date()
-        except ValueError:
-            print("Formato de fecha inválido. Usa el formato YYYY-MM-DD.")
-            return
-
-        filtrados = []
-        for gasto in usuario_actualizado["gastos"]:
-            gasto_fecha = datetime.datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
-            if fecha_inicio <= gasto_fecha <= fecha_fin:
-                filtrados.append(gasto)
-
-        if filtrados:
-            print(f"Gastos entre {fecha_inicial} y {fecha_final}:")
-            print(tabulate(filtrados, headers="keys", tablefmt="grid"))
-        else:
-            print("No hay gastos en ese rango de fechas.")
-
-    elif option == "4":
-        print("Regresando al menú principal...")
-    else:
-        print("Opción inválida. Por favor, seleccione una opción válida.")
+            print("Opción inválida. Por favor, seleccione una opción válida.")
+    
 
 def calcular_totales(usuario):
     email = usuario["email"]
@@ -210,17 +216,20 @@ def verTodosGastos():
     listaGastos = datos["usuario"]["gastos"]
     print(tabulate(listaGastos, headers="keys", tablefmt="grid"))
 
-def generar_Reporte():
-    email="usuario"
+def generar_Reporte(usuario):
+    email = usuario["email"]
     datos = leer_data()
     usuario_ac = None
+
     for i in datos["usuarios"]:
         if i["email"] == email:
             usuario_ac = i
             break
-    if not usuario_ac ("gastos"):
-        print("No hay gastos registrados.")
+
+    if not usuario_ac or "gastos" not in usuario_ac or not usuario_ac["gastos"]:
+        print("Lo siento amiguito, no hay gastos registrados.")
         return
+
     print("=============================================")
     print("         Generar Reporte de Gastos           ")
     print("=============================================")
@@ -230,30 +239,40 @@ def generar_Reporte():
     print("3. Reporte mensual")
     print("4. Ir al menú principal")
     print("=============================================")
+
     opcion = input("Ingrese una opción numérica: ")
+
     if opcion == "1":
-        fecha_reporte = input("Ingrese la fecha en este formato (YYYY-MM-DD)  : ")
+        fecha_reporte = input("Ingrese la fecha en este formato (YYYY-MM-DD): ")
         try:
             fecha = datetime.datetime.strptime(fecha_reporte, "%Y-%m-%d").date()
         except ValueError:
-            print("Formato de fecha inválido o erroneo. Usa el formato YYYY-MM-DD.")
+            print("Formato de fecha inválido. Usa el formato YYYY-MM-DD.")
             return
+
         reporte_diario = []
         for gasto in usuario_ac["gastos"]:
             gasto_fecha = datetime.datetime.strptime(gasto["fecha"], "%Y-%m-%d").date()
             if gasto_fecha == fecha:
                 reporte_diario.append(gasto)
-            print("Como desea ver el reporte?")
-            print("1. En pantalla")
-            print("2. Guardar en archivo")
-            opcion_opcion = input("Ingrese una opción numérica: ")
-            if opcion_opcion == "1":
-                print("Reporte diario:")
-                print(tabulate(reporte_diario, headers="keys", tablefmt="grid"))
-            elif opcion_opcion == "2":
-                with open("reporte_diario.txt", "w") as file:
-                    file.write(tabulate(reporte_diario, headers="keys", tablefmt="grid"))
-                print("Reporte guardado en 'reporte_diario.txt'")
-            else:
-                print("Opción inválida. Por favor, seleccione una opción válida.")
+
+        if not reporte_diario:
+            print("No hay gastos registrados ese día.")
+            return
+
+        print("¿Cómo desea ver el reporte?")
+        print("1. En pantalla")
+        print("2. Guardar en archivo")
+        opcion_opcion = input("Ingrese una opción numérica: ")
+
+        if opcion_opcion == "1":
+            print("Reporte diario:")
+            print(tabulate(reporte_diario, headers="keys", tablefmt="grid"))
+        elif opcion_opcion == "2":
+            with open("reporte_diario.txt", "w") as file:
+                file.write(tabulate(reporte_diario, headers="keys", tablefmt="grid"))
+            print("Reporte guardado en 'reporte_diario.txt'")
+        else:
+            print("Opción inválida.")
+
                    
