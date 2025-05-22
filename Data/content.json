@@ -23,6 +23,30 @@
                     "categoria": "comida",
                     "descripcion": "",
                     "fecha": "2025-05-21"
+                },
+                {
+                    "monto": 15000.0,
+                    "categoria": "Spotify",
+                    "descripcion": "Pago mensual de spotify premium",
+                    "fecha": "2025-05-21"
+                },
+                {
+                    "monto": 16900.0,
+                    "categoria": "Comida ",
+                    "descripcion": "",
+                    "fecha": "2025-05-21"
+                },
+                {
+                    "monto": 25000.0,
+                    "categoria": "Comida",
+                    "descripcion": "Almuerzo",
+                    "fecha": "2025-05-21"
+                },
+                {
+                    "monto": 16800.0,
+                    "categoria": "comidita",
+                    "descripcion": "",
+                    "fecha": "2025-05-21"
                 }
             ],
             "reportes": {
@@ -33,6 +57,24 @@
                             "monto": 10000.0,
                             "categoria": "comida",
                             "descripcion": "",
+                            "fecha": "2025-05-21"
+                        },
+                        {
+                            "monto": 15000.0,
+                            "categoria": "Spotify",
+                            "descripcion": "Pago mensual de spotify premium",
+                            "fecha": "2025-05-21"
+                        },
+                        {
+                            "monto": 16900.0,
+                            "categoria": "Comida ",
+                            "descripcion": "",
+                            "fecha": "2025-05-21"
+                        },
+                        {
+                            "monto": 25000.0,
+                            "categoria": "Comida",
+                            "descripcion": "Almuerzo",
                             "fecha": "2025-05-21"
                         }
                     ]

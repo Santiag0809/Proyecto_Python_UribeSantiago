@@ -5,6 +5,7 @@ from tabulate import tabulate
 
 file_path="Data/content.json"
 
+
 def leer_data():
     with open (file_path,"r") as file:
         return json.load(file)
