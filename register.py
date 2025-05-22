@@ -387,5 +387,78 @@ def borrar_actualizar(usuario):
     if not usuario_a or "gastos" not in usuario_a or not usuario_a["gastos"]:
         print("Lo siento amiguito, no hay gastos registrados.")
         return
-    
-                     
+
+    while True:
+        print("\n=============================================")
+        print("         Editar o Borrar un Gasto            ")
+        print("=============================================")
+        print("Gastos registrados:\n")
+        gastos = usuario_a["gastos"]
+        for idx, gasto in enumerate(gastos):
+            print(f"{idx + 1}. {gasto['categoria']} - {gasto['monto']} - {gasto['fecha']} - {gasto['descripcion']}")
+
+        print("\n0. Volver al menú anterior")
+        opcion = input("\nSeleccione el número del gasto que desea editar o borrar: ")
+
+        if opcion == "0":
+            break
+
+        try:
+            opcion_int = int(opcion)
+            if opcion_int < 1 or opcion_int > len(gastos):
+                print("Opción fuera de rango. Intente nuevamente.")
+                continue
+        except ValueError:
+            print("Debes ingresar un número entero válido.")
+            continue
+
+        index = opcion_int - 1
+        gasto_seleccionado = gastos[index]
+
+        print("\n¿Qué desea hacer con este gasto?")
+        print("1. Editar")
+        print("2. Borrar")
+        accion = input("Ingrese una opción numérica: ")
+
+        if accion == "1":
+            print("\nIngrese los nuevos datos del gasto (deja en blanco para mantener el valor actual):")
+
+            nueva_categoria = input(f"Categoría [{gasto_seleccionado['categoria']}]: ")
+            nuevo_monto = input(f"Monto [{gasto_seleccionado['monto']}]: ")
+            nueva_fecha = input(f"Fecha (YYYY-MM-DD) [{gasto_seleccionado['fecha']}]: ")
+            nueva_descripcion = input(f"Descripción [{gasto_seleccionado['descripcion']}]: ")
+
+            if nueva_categoria:
+                gasto_seleccionado['categoria'] = nueva_categoria
+            if nuevo_monto:
+                try:
+                    gasto_seleccionado['monto'] = float(nuevo_monto)
+                except ValueError:
+                    print("Monto inválido. No se actualizó.")
+            if nueva_fecha:
+                try:
+                    datetime.datetime.strptime(nueva_fecha, "%Y-%m-%d")
+                    gasto_seleccionado['fecha'] = nueva_fecha
+                except ValueError:
+                    print("Fecha inválida. No se actualizó.")
+            if nueva_descripcion:
+                gasto_seleccionado['descripcion'] = nueva_descripcion
+
+            print("Gasto actualizado correctamente.")
+
+        elif accion == "2":
+            confirmacion = input("¿Está seguro de que desea borrar este gasto? (s/n): ")
+            if confirmacion.lower() == "s":
+                gastos.pop(index)
+                print("Gasto eliminado con éxito.")
+            else:
+                print("Operación cancelada.")
+        else:
+            print("Opción inválida. Intente nuevamente.")
+            continue
+
+        with open("data/content.json", "w") as archivo:
+            json.dump(datos, archivo, indent=4)
+        print("Cambios guardados correctamente.")
+
+

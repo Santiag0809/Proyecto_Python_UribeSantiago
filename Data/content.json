@@ -7,9 +7,9 @@
             "password": "123",
             "gastos": [
                 {
-                    "monto": 16700.0,
-                    "categoria": "comida",
-                    "descripcion": "lonchera",
+                    "monto": 80000.0,
+                    "categoria": "Ropa",
+                    "descripcion": "Jean negro",
                     "fecha": "2025-05-19"
                 },
                 {
