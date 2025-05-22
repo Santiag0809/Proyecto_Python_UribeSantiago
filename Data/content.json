@@ -24,7 +24,20 @@
                     "descripcion": "",
                     "fecha": "2025-05-21"
                 }
-            ]
+            ],
+            "reportes": {
+                "diario": {
+                    "fecha": "2025-05-21",
+                    "gastos": [
+                        {
+                            "monto": 10000.0,
+                            "categoria": "comida",
+                            "descripcion": "",
+                            "fecha": "2025-05-21"
+                        }
+                    ]
+                }
+            }
         }
     ]
 }

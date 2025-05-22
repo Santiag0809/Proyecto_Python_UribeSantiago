@@ -244,52 +244,136 @@ def generar_Reporte(usuario):
         print("Lo siento amiguito, no hay gastos registrados.")
         return
 
-    print("=============================================")
-    print("         Generar Reporte de Gastos           ")
-    print("=============================================")
-    print("Seleccione el tipo de reporte:")
-    print("1. Reporte diario")
-    print("2. Reporte semanal")
-    print("3. Reporte mensual")
-    print("4. Ir al menú principal")
-    print("=============================================")
+    while True:
+        print("=============================================")
+        print("         Generar Reporte de Gastos           ")
+        print("=============================================")
+        print("Seleccione el tipo de reporte:")
+        print("1. Reporte diario")
+        print("2. Reporte semanal")
+        print("3. Reporte mensual")
+        print("4. Ir al menú principal")
+        print("=============================================")
 
-    opcion = input("Ingrese una opción numérica: ")
+        opcion = input("Ingrese una opción numérica: ")
 
-    if opcion == "1":
-        fecha_dia = datetime.date.today()
-        gastos_dia = []
+        if opcion == "1":
+            fecha_dia = datetime.date.today()
+            gastos_dia = []
 
-        for gastito in usuario["gastos"]:
-            fecha_ver = datetime.datetime.strptime(gastito["fecha"], "%Y-%m-%d").date()
-            if fecha_ver == fecha_dia:
-                gastos_dia.append(gastito)
-    if not gastos_dia:
-        print ("No has hecho ningun gasto el dia de hoy amiguito")
+            for gastito in usuario_ac["gastos"]:
+                fecha_ver = datetime.datetime.strptime(gastito["fecha"], "%Y-%m-%d").date()
+                if fecha_ver == fecha_dia:
+                    gastos_dia.append(gastito)
 
+            if not gastos_dia:
+                print("No has hecho ningún gasto el día de hoy, amiguito.")
+                continue
 
-        print("¿Cómo desea ver el reporte?")
-        print("1. En pantalla")
-        print("2. Guardar en archivo")
-        opcion_opcion = input("Ingrese una opción numérica: ")
+            print("¿Cómo desea ver el reporte?")
+            print("1. En pantalla")
+            print("2. Guardar en archivo")
+            opcion_opcion = input("Ingrese una opción numérica: ")
 
-        if opcion_opcion == "1":
-            print("Reporte diario:")
-            print(tabulate(gastos_dia, headers="keys", tablefmt="grid"))
-            
-        elif opcion_opcion == "2":
-            if "reportes" not in usuario:
-                usuario["reportes"] = {}
-            
-        usuario["reportes"]["diario"]= {
-            "fecha": str(fecha_dia),
-            "gastos": gastito
-            
-        }
-        with open ("data/content.json", "w") as carpetita:
-            return json.dump(datos,carpetita, indent=4)
-        print("Listo amiguito hemos guardado tu reporte en content.json")
-                   
+            if opcion_opcion == "1":
+                print("Reporte diario:")
+                print(tabulate(gastos_dia, headers="keys", tablefmt="grid"))
+
+            elif opcion_opcion == "2":
+                if "reportes" not in usuario_ac:
+                    usuario_ac["reportes"] = {}
+
+                usuario_ac["reportes"]["diario"] = {
+                    "fecha": str(fecha_dia),
+                    "gastos": gastos_dia
+                }
+
+                with open("data/content.json", "w") as carpetita:
+                    json.dump(datos, carpetita, indent=4)
+
+                print("Listo amiguito, hemos guardado tu reporte en content.json")
+
+        elif opcion == "2":
+            fecha_hoy = datetime.date.today()
+            fecha_semana = fecha_hoy - datetime.timedelta(days=7)
+            gastos_Semana = []
+
+            for g in usuario_ac["gastos"]:
+                ver = datetime.datetime.strptime(g["fecha"], "%Y-%m-%d").date()
+                if fecha_semana <= ver <= fecha_hoy:
+                    gastos_Semana.append(g)
+
+            if not gastos_Semana:
+                print("No hay gastos en los últimos 7 días.")
+                continue
+
+            print("¿Cómo desea ver el reporte?")
+            print("1. En pantalla")
+            print("2. Guardar en archivo")
+            opci = input("Ingrese una opción numérica: ")
+
+            if opci == "1":
+                print("Reporte semanal: ")
+                print(tabulate(gastos_Semana, headers="keys", tablefmt="grid"))
+
+            elif opci == "2":
+                if "reportes" not in usuario_ac:
+                    usuario_ac["reportes"] = {}
+
+                usuario_ac["reportes"]["semanal"] = {
+                    "fecha": str(fecha_hoy),
+                    "gastos": gastos_Semana
+                }
+
+                with open("data/content.json", "w") as archivo:
+                    json.dump(datos, archivo, indent=4)
+
+                print("Listo amiguito, tu reporte de la semana ha sido guardado en content.json")
+
+        elif opcion == "3":
+            today = datetime.date.today()
+            fecha_mes = today - datetime.timedelta(days=30)
+            gastos_mes = []
+
+            for mes in usuario_ac["gastos"]:
+                mostrar = datetime.datetime.strptime(mes["fecha"], "%Y-%m-%d").date()
+                if fecha_mes <= mostrar <= today:
+                    gastos_mes.append(mes)
+
+            if not gastos_mes:
+                print("No has hecho gastos en el último mes.")
+                continue
+
+            print("¿Cómo desea ver el reporte?")
+            print("1. En pantalla")
+            print("2. Guardar en archivo")
+            opcitres = input("Ingrese una opción numérica: ")
+
+            if opcitres == "1":
+                print("Reporte mensual: ")
+                print(tabulate(gastos_mes, headers="keys", tablefmt="grid"))
+
+            elif opcitres == "2":
+                if "reportes" not in usuario_ac:
+                    usuario_ac["reportes"] = {}
+
+                usuario_ac["reportes"]["mensual"] = {
+                    "fecha": str(fecha_mes),
+                    "gastos": gastos_mes
+                }
+
+                with open("data/content.json", "w") as carpetita:
+                    json.dump(datos, carpetita, indent=4)
+
+                print("Listo amigazos, tu reporte del mes se ha guardado correctamente en el archivo content.json")
+
+        elif opcion == "4":
+            print("Saliendo al menú principal...")
+            break
+
+        else:
+            print("Opción no válida. Intente nuevamente.")
+                 
 def borrar_actualizar(usuario):
     email = usuario["email"]
     datos = leer_data()
