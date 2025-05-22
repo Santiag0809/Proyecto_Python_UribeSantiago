@@ -44,7 +44,7 @@ while usuario:
     if opcion == "4":
         generar_Reporte(usuario)
     if opcion == "5":
-        print("No hay NO HAY")
+        print("Función de actualizar o borrar gastos no implementada.")
     if opcion == "6":
         print("Estas seguro que desea salir? (S/N): ")
         salir = input().strip().lower()

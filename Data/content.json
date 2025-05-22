@@ -1,3 +1,30 @@
 {
-    
+    "usuarios": [
+        {
+            "nombre": "ejemplo",
+            "apellido": "yimail",
+            "email": "ejemplo@gmail.com",
+            "password": "123",
+            "gastos": [
+                {
+                    "monto": 16700.0,
+                    "categoria": "comida",
+                    "descripcion": "lonchera",
+                    "fecha": "2025-05-19"
+                },
+                {
+                    "monto": 16900.0,
+                    "categoria": "spotify",
+                    "descripcion": "",
+                    "fecha": "2025-05-20"
+                },
+                {
+                    "monto": 10000.0,
+                    "categoria": "comida",
+                    "descripcion": "",
+                    "fecha": "2025-05-21"
+                }
+            ]
+        }
+    ]
 }
