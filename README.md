@@ -1,4 +1,4 @@
-# Link video explicacion ()
+# Link video explicacion (https://youtu.be/fLlT6KOsres)
 # Simulador de Gasto Diario
 El Simulador de Gasto Diario es una aplicación de consola diseñada para ayudar a los usuarios a registrar y monitorear sus gastos diarios en diferentes categorías, como comida, transporte, entretenimiento, entre otros.
 
